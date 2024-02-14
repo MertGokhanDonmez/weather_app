@@ -10,7 +10,7 @@ class WeatherProvider extends ChangeNotifier {
 
   Future<void> fetchWeather() async {
     try {
-      final weatherData = await WeatherService().getWeather();
+      final weatherData = await WeatherService().getWeather('Izmir', 'metric');
       _weather = weatherData;
       notifyListeners(); // degiskenleri dinleyen herkese degisiklikleri haber veriyor
     } catch (error) {

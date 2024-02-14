@@ -24,20 +24,75 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Consumer<WeatherProvider>(
           builder: (context, weatherProvider, child) {
-            print("weather -> ${weatherProvider.weather}");
+            // print("weather -> ${weatherProvider.weather}");
             if (weatherProvider.weather == null) {
               // Veri bekleniyor ise gösterilecek widget
               return CircularProgressIndicator();
             } else {
               WeatherModel weather = weatherProvider.weather!;
-
-              // İstediğiniz şekilde UI oluşturun, aşağıda basit bir örnek var:
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Sıcaklık: ${weather.current.temperature} K'),
-                  Text('Hissedilen Sıcaklık: ${weather.current.feelsLike} K'),
-                  // Diğer hava durumu bilgilerini ekleyin...
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                        ),
+                        child: SizedBox(
+                          width: 300,
+                          height: 100,
+                          child: Center(
+                              child: Text(
+                                  'Sıcaklık: ${weather.current.temperature}')),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                        ),
+                        child: SizedBox(
+                          width: 300,
+                          height: 100,
+                          child: Center(
+                              child: Text(
+                                  'Hissedilen Sıcaklık: ${weather.current.feelsLike}')),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Card(
+                        elevation: 0,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                        child: SizedBox(
+                          width: 300,
+                          height: 100,
+                          child: Center(
+                              child: Text(
+                                  'Hissedilen Sıcaklık: ${weather.current.feelsLike}')),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               );
             }

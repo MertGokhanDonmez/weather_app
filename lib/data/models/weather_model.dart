@@ -21,31 +21,36 @@ class WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
-      latitude: json['lat'],
-      longitude: json['lon'],
+      latitude: json['lat'].toDouble(),
+      longitude: json['lon'].toDouble(),
       timezone: json['timezone'],
       timezoneOffset: json['timezone_offset'],
       current: Current(
-        dt: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
-        sunrise: DateTime.fromMillisecondsSinceEpoch(json['sunrise'] * 1000),
-        sunset: DateTime.fromMillisecondsSinceEpoch(json['sunset'] * 1000),
-        temperature: json['temperature'],
-        feelsLike: json['feels_like'],
-        pressure: json['pressure'],
-        humidity: json['humidity'],
-        dewPoint: json['dew_point'],
-        uvi: json['uvi'],
-        clouds: json['clouds'],
-        visibility: json['visibility'],
-        windSpeed: json['wind_speed'],
-        windDegree: json['wind_deg'],
-        windGust: json['wind_gust'],
-        weatherDescription: WeatherDesc(
-          id: json["id"],
-          main: json["main"],
-          description: json["description"],
-          icon: json["icon"],
-        ),
+        dt: DateTime.fromMillisecondsSinceEpoch(json['current']['dt'] * 1000),
+        sunrise: DateTime.fromMillisecondsSinceEpoch(
+            json['current']['sunrise'] * 1000),
+        sunset: DateTime.fromMillisecondsSinceEpoch(
+            json['current']['sunset'] * 1000),
+        temperature: json['current']['temp']
+            .toDouble(), // converted to double because if the data comes as an integer
+        feelsLike: json['current']['feels_like'].toDouble(),
+        pressure: json['current']['pressure'],
+        humidity: json['current']['humidity'],
+        dewPoint: json['current']['dew_point'].toDouble(),
+        uvi: json['current']['uvi'].toDouble(),
+        clouds: json['current']['clouds'],
+        visibility: json['current']['visibility'],
+        windSpeed: json['current']['wind_speed'].toDouble(),
+        windDegree: json['current']['wind_deg'],
+        weatherDescription:
+            (json['current']['weather'] as List<dynamic>).map((data) {
+          return WeatherDesc(
+            id: data["id"],
+            main: data["main"],
+            description: data["description"],
+            icon: data["icon"],
+          );
+        }).toList(),
       ),
       // minutelyForecast:
       //     (json['minutely_forecast'] as List<dynamic>).map((minute) {

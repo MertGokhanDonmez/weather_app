@@ -18,10 +18,8 @@ class Current {
       visibility; // Average visibility, metres. The maximum value of the visibility is 10km
   final double
       windSpeed; // Wind speed. Wind speed. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour.
-  final double
-      windGust; // Wind gust. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour.
   final int windDegree; //  Wind direction, degrees (meteorological)
-  final WeatherDesc weatherDescription;
+  final List<WeatherDesc> weatherDescription;
 
   Current({
     required this.dt,
@@ -38,6 +36,5 @@ class Current {
     required this.windSpeed,
     required this.windDegree,
     required this.weatherDescription,
-    required this.windGust,
   });
 }
