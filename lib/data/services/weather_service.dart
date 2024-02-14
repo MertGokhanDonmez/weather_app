@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 import '../../configs/config.dart';
@@ -17,7 +19,10 @@ class WeatherService {
       var response = await http.get(Uri.parse(
           '$API_ENDPOINT?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=$OPENAPIWEATHER_API_KEY'));
       if (response.statusCode == 200) {
-        return response;
+        final weatherData = json.decode(response.body);
+        final weatherModel = WeatherModel.fromJson(weatherData);
+        print(weatherModel);
+        return weatherModel;
       } else {
         print('API çağrısı başarısız: ${response.statusCode}');
         throw Exception('Hava durumu verileri alınamadı');

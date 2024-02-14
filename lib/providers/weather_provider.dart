@@ -10,9 +10,9 @@ class WeatherProvider extends ChangeNotifier {
 
   Future<void> fetchWeather() async {
     try {
-      final weather = await WeatherService().getWeather();
-      _weather = weather;
-      notifyListeners();
+      final weatherData = await WeatherService().getWeather();
+      _weather = weatherData;
+      notifyListeners(); // degiskenleri dinleyen herkese degisiklikleri haber veriyor
     } catch (error) {
       print('Hava durumu verileri alınamadı: $error');
       _weather = null; // Hata durumunda _weather'ı null olarak ayarla

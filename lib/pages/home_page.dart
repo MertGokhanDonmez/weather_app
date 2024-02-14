@@ -14,6 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final weatherInfo = context.read<WeatherProvider>();
+    weatherInfo.fetchWeather();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Weather App'),
@@ -21,6 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Consumer<WeatherProvider>(
           builder: (context, weatherProvider, child) {
+            print("weather -> ${weatherProvider.weather}");
             if (weatherProvider.weather == null) {
               // Veri bekleniyor ise gösterilecek widget
               return CircularProgressIndicator();
@@ -31,8 +35,8 @@ class _HomePageState extends State<HomePage> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Sıcaklık: ${weather.temperature} K'),
-                  Text('Hissedilen Sıcaklık: ${weather.feelsLike} K'),
+                  Text('Sıcaklık: ${weather.current.temperature} K'),
+                  Text('Hissedilen Sıcaklık: ${weather.current.feelsLike} K'),
                   // Diğer hava durumu bilgilerini ekleyin...
                 ],
               );
