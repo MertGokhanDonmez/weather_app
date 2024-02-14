@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/weather_model.dart';
 import 'package:weather_app/data/services/weather_service.dart';
 
 class WeatherProvider extends ChangeNotifier {
-  WeatherModel? _weather;
+  CurrentWeatherModel? _weather;
 
-  WeatherModel? get weather => _weather;
+  CurrentWeatherModel? get weather => _weather;
 
   Future<void> fetchWeather() async {
     try {

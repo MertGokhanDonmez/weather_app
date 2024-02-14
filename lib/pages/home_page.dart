@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/data/models/weather_model.dart';
-import 'package:weather_app/data/services/weather_service.dart';
+import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/providers/weather_provider.dart';
 
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
               // Veri bekleniyor ise gösterilecek widget
               return CircularProgressIndicator();
             } else {
-              WeatherModel weather = weatherProvider.weather!;
+              CurrentWeatherModel weather = weatherProvider.weather!;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                           height: 100,
                           child: Center(
                               child: Text(
-                                  'Sıcaklık: ${weather.current.temperature}')),
+                                  'Sıcaklık: ${weather.main.temperature}')),
                         ),
                       ),
                     ],
@@ -72,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                           height: 100,
                           child: Center(
                               child: Text(
-                                  'Hissedilen Sıcaklık: ${weather.current.feelsLike}')),
+                                  'Hissedilen Sıcaklık: ${weather.main.feelsLike}')),
                         ),
                       ),
                     ],
@@ -88,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                           height: 100,
                           child: Center(
                               child: Text(
-                                  'Hissedilen Sıcaklık: ${weather.current.feelsLike}')),
+                                  'Hissedilen Sıcaklık: ${weather.main.feelsLike}')),
                         ),
                       ),
                     ],
