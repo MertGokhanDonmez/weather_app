@@ -48,8 +48,8 @@ class _HomePageState extends State<HomePage> {
                           width: 300,
                           height: 100,
                           child: Center(
-                              child: Text(
-                                  'Sıcaklık: ${weather.main.temperature}')),
+                              child:
+                                  Text('Sıcaklık: ${weather.main.feelsLike}')),
                         ),
                       ),
                     ],

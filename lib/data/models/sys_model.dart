@@ -11,4 +11,14 @@ class SysModel {
     required this.sunrise,
     required this.sunset,
   });
+
+  factory SysModel.fromJson(Map<String, dynamic> json) {
+    return SysModel(
+      type: json['type'],
+      id: json['id'],
+      country: json['country'],
+      sunrise: json['sunrise'],
+      sunset: json['sunset'],
+    );
+  }
 }

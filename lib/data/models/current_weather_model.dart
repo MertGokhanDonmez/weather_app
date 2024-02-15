@@ -32,39 +32,17 @@ class CurrentWeatherModel {
 
   factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) {
     return CurrentWeatherModel(
-      coordinate: CoordinateModel(
-          longitude: json['coord']['lon'], latitude: json['coord']['lat']),
+      coordinate: CoordinateModel.fromJson(json['coord']),
       weather: (json['weather'] as List<dynamic>).map((data) {
-        return WeatherDesc(
-          id: data["id"],
-          main: data["main"],
-          description: data["description"],
-          icon: data["icon"],
-        );
+        return WeatherDesc.fromJson(data);
       }).toList(),
       base: json['base'],
-      main: MainModel(
-        temperature: json['main']['temp'],
-        feelsLike: json['main']['feels_like'],
-        minTemp: json['main']['temp_min'],
-        maxTemp: json['main']['temp_max'],
-        pressure: json['main']['pressure'],
-        humidity: json['main']['humidity'],
-      ),
+      main: MainModel.fromJson(json['main']),
       visibility: json['visibility'],
-      wind: WindModel(
-        speed: json['wind']['speed'],
-        degrees: json['wind']['deg'],
-      ),
-      clouds: CloudsModel(all: json['clouds']['all']),
+      wind: WindModel.fromJson(json['wind']),
+      clouds: CloudsModel.fromJson(json['clouds']),
       dt: json['dt'],
-      sys: SysModel(
-        type: json['sys']['type'],
-        id: json['sys']['id'],
-        country: json['sys']['country'],
-        sunrise: json['sys']['sunrise'],
-        sunset: json['sys']['sunset'],
-      ),
+      sys: SysModel.fromJson(json['sys']),
       cityName: json['name'],
     );
   }
