@@ -19,7 +19,7 @@ class Current {
   final double
       windSpeed; // Wind speed. Wind speed. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour.
   final int windDegree; //  Wind direction, degrees (meteorological)
-  final List<WeatherDesc> weatherDescription;
+  final List<WeatherDesc> weather;
 
   Current({
     required this.dt,
@@ -35,6 +35,27 @@ class Current {
     required this.visibility,
     required this.windSpeed,
     required this.windDegree,
-    required this.weatherDescription,
+    required this.weather,
   });
+
+  factory Current.fromJson(Map<String, dynamic> json) {
+    return Current(
+      dt: json['dt'],
+      sunrise: json['sunrise'],
+      sunset: json['sunset'],
+      temperature: json['temp'],
+      feelsLike: json['feels_like'],
+      pressure: json['pressure'],
+      humidity: json['humidity'],
+      dewPoint: json['dew_point'],
+      clouds: json['clouds'],
+      uvi: json['uvi'],
+      visibility: json['visibility'],
+      windSpeed: json['wind_speed'],
+      windDegree: json['wind_deg'],
+      weather: (json['weather'] as List<dynamic>).map((data) {
+        return WeatherDesc.fromJson(data);
+      }).toList(),
+    );
+  }
 }

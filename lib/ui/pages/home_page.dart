@@ -86,28 +86,32 @@ class ForecastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 20.0,
-          width: 90,
-          child: Center(child: Text('${forecast.dateTime}')),
-        ),
-        Container(
-          height: 60.0,
-          width: 80,
-          child: Center(
-              child: Image.network(
-            'http://openweathermap.org/img/w/${forecast.weather[0].icon}.png',
-          )),
-        ),
-        Container(
-          height: 20.0,
-          width: 80,
-          child: Center(child: Text('${forecast.main.temperature}°C')),
-        ),
-      ],
-    );
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 5),
+        child: Column(
+          children: [
+            Container(
+              height: 20.0,
+              width: 90,
+              child: Center(
+                  child: Text(
+                      '${DateTime.parse(forecast.dateTime).hour.toString().padLeft(2, '0')}')),
+            ),
+            Container(
+              height: 50.0,
+              width: 80,
+              child: Center(
+                  child: Image.network(
+                'http://openweathermap.org/img/w/${forecast.weather[0].icon}.png',
+              )),
+            ),
+            Container(
+              height: 20.0,
+              width: 80,
+              child: Center(
+                  child: Text('${forecast.main.temperature!.round()}°C')),
+            ),
+          ],
+        ));
   }
 }

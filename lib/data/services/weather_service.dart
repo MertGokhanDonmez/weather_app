@@ -7,7 +7,7 @@ import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 
 import '../../configs/config.dart';
-import '../models/old/weather_model.dart';
+import '../models/weather_model.dart';
 
 class WeatherService {
   static final WeatherService _instance = WeatherService._privateConstructor();
