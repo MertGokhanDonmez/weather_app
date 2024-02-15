@@ -5,7 +5,7 @@ import 'package:weather_app/data/models/main_model.dart';
 import 'package:weather_app/data/models/weather_desc_model.dart';
 
 class ForecastModel {
-  final ListItemModel list;
+  final List<ListItemModel> list;
   final CityModel city;
   ForecastModel({
     required this.list,
@@ -14,7 +14,9 @@ class ForecastModel {
 
   factory ForecastModel.fromJson(Map<String, dynamic> json) {
     return ForecastModel(
-        list: ListItemModel.fromJson(json['list']),
+        list: (json['list'] as List<dynamic>).map((data) {
+          return ListItemModel.fromJson(data);
+        }).toList(),
         city: CityModel.fromJson(json['city']));
   }
 }

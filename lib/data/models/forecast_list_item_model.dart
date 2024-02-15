@@ -12,8 +12,8 @@ class ListItemModel {
   final CloudsModel clouds;
   final WindModel wind;
   final int visibility;
-  final double pop;
-  final SysModel sys;
+  final double pop; // Probability of precipitation.
+  final String pod; // Part of the day. (ex n: night)
   final String dateTime;
 
   ListItemModel({
@@ -24,7 +24,7 @@ class ListItemModel {
     required this.wind,
     required this.visibility,
     required this.pop,
-    required this.sys,
+    required this.pod,
     required this.dateTime,
   });
 
@@ -35,11 +35,11 @@ class ListItemModel {
       weather: (json['weather'] as List<dynamic>).map((data) {
         return WeatherDesc.fromJson(data);
       }).toList(),
-      clouds: CloudsModel.fromJson(json['all']),
+      clouds: CloudsModel.fromJson(json['clouds']),
       wind: WindModel.fromJson(json['wind']),
       visibility: json['visibility'],
       pop: json['pop'].toDouble(),
-      sys: SysModel.fromJson(json['sys']),
+      pod: json['sys']['pod'],
       dateTime: json['dt_txt'],
     );
   }
