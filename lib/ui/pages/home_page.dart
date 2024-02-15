@@ -5,7 +5,6 @@ import 'package:weather_app/data/models/forecast_list_item_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/ui/widgets/MainCard.dart';
-import 'package:weather_app/ui/widgets/WeatherIcon.dart';
 import 'package:weather_app/utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,15 +23,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Consumer<WeatherProvider>(
-          builder: (context, weatherProvider, child) {
+          builder: (context, value, child) {
             // print("weather -> ${weatherProvider.weather}");
-            if (weatherProvider.weather == null ||
-                weatherProvider.forecastData == null) {
+            if (value.weather == null || value.forecastData == null) {
               // Veri bekleniyor ise gösterilecek widget
               return CircularProgressIndicator();
             } else {
-              CurrentWeatherModel weather = weatherProvider.weather!;
-              ForecastModel forecastWeather = weatherProvider.forecastData!;
+              CurrentWeatherModel weather = value.weather!;
+              ForecastModel forecastWeather = value.forecastData!;
               final weatherImage =
                   WeatherUtils.getWeatherAssets(weather.weather[0].main)[1];
               return Container(
