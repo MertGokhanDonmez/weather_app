@@ -6,14 +6,15 @@ import 'package:weather_app/utils.dart';
 
 class MainCard extends StatelessWidget {
   final CurrentWeatherModel weather;
+  var isFiltered;
 
-  MainCard({required this.weather});
+  MainCard({required this.weather, required this.isFiltered});
 
   @override
   Widget build(BuildContext context) {
     final weatherAssets =
         WeatherUtils.getWeatherAssets(weather.weather[0].main);
-    final isFiltered = false;
+    final _isFiltered = isFiltered ?? false;
     return Container(
       child: Column(
         children: [
@@ -23,7 +24,7 @@ class MainCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  isFiltered ? '' : 'Konum Bilgisi',
+                  _isFiltered ? '' : 'Konumunuz',
                   style: const TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -36,19 +37,22 @@ class MainCard extends StatelessWidget {
                         ),
                       ]),
                 ),
-                Text(
-                  weather.cityName,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: isFiltered ? 50 : 20,
-                    color: Color.fromARGB(255, 240, 240, 240),
-                    shadows: const [
-                      Shadow(
-                        color: Colors.black,
-                        blurRadius: 2.0,
-                        offset: Offset(2.0, 2.0),
-                      ),
-                    ],
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    weather.cityName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: _isFiltered ? 50 : 20,
+                      color: Color.fromARGB(255, 240, 240, 240),
+                      shadows: const [
+                        Shadow(
+                          color: Colors.black,
+                          blurRadius: 2.0,
+                          offset: Offset(2.0, 2.0),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

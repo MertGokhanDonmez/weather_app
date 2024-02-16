@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
+import 'package:weather_app/ui/widgets/CustomExceptions.dart';
 
 import '../../configs/config.dart';
 import '../models/weather_model.dart';
@@ -28,6 +29,11 @@ class WeatherService {
         return weatherModel;
       } else {
         print('API çağrısı başarısız: ${response.body}');
+        Map<String, dynamic> errorData = json.decode(response.body);
+        if (errorData['message'] == 'city not found') {
+          throw CustomExceptions.setError(
+              "Girdiğiniz şehir ismini tekrar kontrol ediniz");
+        }
         throw Exception('Hava durumu verileri alınamadı');
       }
     } catch (error) {

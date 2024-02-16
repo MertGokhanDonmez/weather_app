@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late BuildContext _scaffoldContext;
   final TextEditingController cityController = TextEditingController();
 
   @override
@@ -26,11 +27,16 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Consumer<WeatherProvider>(
           builder: (context, value, child) {
-            // print("weather -> ${weatherProvider.weather}");
             if (value.weather == null || value.forecastData == null) {
               // Veri bekleniyor ise gösterilecek widget
-              return CircularProgressIndicator();
+              if (value.errorMessage.isNotEmpty) {
+                // Hata durumunda uyarı göster
+                return Text(value.errorMessage);
+              } else {
+                return CircularProgressIndicator();
+              }
             } else {
+              // Veriler varsa normal görüntüleme
               CurrentWeatherModel weather = value.weather!;
               ForecastModel forecastWeather = value.forecastData!;
               final weatherImage =
@@ -38,8 +44,7 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image:
-                        AssetImage(weatherImage), // Resminizin yolunu belirtin
+                    image: AssetImage(weatherImage),
                     fit: BoxFit
                         .cover, // Resmin boyutunu sayfa boyutuna göre ayarlar
                   ),
@@ -48,34 +53,32 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Flexible(
-                        flex: 0,
-                        child: Row(
-                          children: [
-                            SizedBox(width: 8),
-                            Expanded(
-                              child: TextField(
-                                controller: cityController,
-                                decoration: const InputDecoration(
-                                    hintText: 'Şehir Adı',
-                                    icon: Icon(Icons.search)),
-                              ),
+                      Row(
+                        children: [
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              controller: cityController,
+                              decoration: const InputDecoration(
+                                  hintText: 'Şehir Adı',
+                                  icon: Icon(Icons.search)),
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                weatherInfo.fetchWeather(
-                                  selectedCity: cityController.text,
-                                );
-                              },
-                              child: Text('Ara'),
-                            ),
-                          ],
-                        ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              weatherInfo.fetchWeather(
+                                selectedCity: cityController.text,
+                              );
+                            },
+                            child: Text('Ara'),
+                          ),
+                        ],
                       ),
                       Expanded(
                         child: Center(
                           child: MainCard(
                             weather: weather,
+                            isFiltered: cityController.text != '',
                           ),
                         ),
                       ),

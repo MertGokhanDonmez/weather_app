@@ -3,8 +3,12 @@ import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/weather_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 import 'package:weather_app/data/services/weather_service.dart';
+import 'package:weather_app/ui/widgets/CustomExceptions.dart';
 
 class WeatherProvider extends ChangeNotifier {
+  String _errorMessage = '';
+  String get errorMessage => _errorMessage;
+
   CurrentWeatherModel? _weather;
   ForecastModel? _forecastData;
 
@@ -24,7 +28,7 @@ class WeatherProvider extends ChangeNotifier {
 
       notifyListeners(); // degiskenleri dinleyen herkese degisiklikleri haber veriyor
     } catch (error) {
-      print('Hava durumu verileri alınamadı: $error');
+      _setErrorMessage('${error}');
       _weather = null; // Hata durumunda _weather'ı null olarak ayarla
       notifyListeners();
     }
@@ -36,5 +40,10 @@ class WeatherProvider extends ChangeNotifier {
 
     // WeatherService sınıfını kullanarak hava durumu ve tahmin verilerini güncelle
     fetchWeather(selectedCity: newCity);
+  }
+
+  void _setErrorMessage(String message) {
+    _errorMessage = message;
+    notifyListeners();
   }
 }
