@@ -11,14 +11,15 @@ class WeatherProvider extends ChangeNotifier {
   CurrentWeatherModel? get weather => _weather;
   ForecastModel? get forecastData => _forecastData;
 
-  Future<void> fetchWeather() async {
+  Future<void> fetchWeather({selectedCity}) async {
     String? cityName = await WeatherService().getCurrentCity();
     try {
-      final weatherData = await WeatherService().getWeather(cityName, 'metric');
+      final weatherData =
+          await WeatherService().getWeather(selectedCity ?? cityName, 'metric');
       _weather = weatherData;
 
-      final forecastData =
-          await WeatherService().getWeeklyWeatherForcast(cityName, 'metric');
+      final forecastData = await WeatherService()
+          .getWeeklyWeatherForcast(selectedCity ?? cityName, 'metric');
       _forecastData = forecastData;
 
       notifyListeners(); // degiskenleri dinleyen herkese degisiklikleri haber veriyor
@@ -27,5 +28,13 @@ class WeatherProvider extends ChangeNotifier {
       _weather = null; // Hata durumunda _weather'ı null olarak ayarla
       notifyListeners();
     }
+  }
+
+  void setSelectedCity(String newCity) {
+    // Seçilen şehir bilgisini güncelle
+    var _selectedCity = newCity;
+
+    // WeatherService sınıfını kullanarak hava durumu ve tahmin verilerini güncelle
+    fetchWeather(selectedCity: newCity);
   }
 }
