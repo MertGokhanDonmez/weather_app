@@ -42,31 +42,37 @@ class _HomePageState extends State<HomePage> {
                         .cover, // Resmin boyutunu sayfa boyutuna göre ayarlar
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MainCard(
-                      weather: weather,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 110, 110, 110),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children:
-                                forecastWeather.list.take(4).map((forecast) {
-                              return ForecastCard(forecast: forecast);
-                            }).toList(),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: MainCard(
+                            weather: weather,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 110, 110, 110),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children:
+                                  forecastWeather.list.take(6).map((forecast) {
+                                return ForecastCard(forecast: forecast);
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
@@ -84,32 +90,29 @@ class ForecastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Expanded(
+      child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5),
         child: Column(
           children: [
             Container(
-              height: 20.0,
-              width: 90,
               child: Center(
                   child: Text(
                       '${DateTime.parse(forecast.dateTime).hour.toString().padLeft(2, '0')}')),
             ),
             Container(
-              height: 50.0,
-              width: 80,
               child: Center(
                   child: Image.network(
                 'http://openweathermap.org/img/w/${forecast.weather[0].icon}.png',
               )),
             ),
             Container(
-              height: 20.0,
-              width: 80,
               child: Center(
                   child: Text('${forecast.main.temperature!.round()}°C')),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
