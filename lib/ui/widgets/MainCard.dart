@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/forecast_list_item_model.dart';
@@ -18,15 +17,6 @@ class MainCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          const Flexible(
-            flex: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(Icons.search),
-              ],
-            ),
-          ),
           Flexible(
             flex: 1,
             child: Column(

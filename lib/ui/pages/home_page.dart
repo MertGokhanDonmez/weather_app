@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController cityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final weatherInfo = context.read<WeatherProvider>();
@@ -46,6 +48,30 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Flexible(
+                        flex: 0,
+                        child: Row(
+                          children: [
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                controller: cityController,
+                                decoration: const InputDecoration(
+                                    hintText: 'Şehir Adı',
+                                    icon: Icon(Icons.search)),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                weatherInfo.fetchWeather(
+                                  selectedCity: cityController.text,
+                                );
+                              },
+                              child: Text('Ara'),
+                            ),
+                          ],
+                        ),
+                      ),
                       Expanded(
                         child: Center(
                           child: MainCard(
