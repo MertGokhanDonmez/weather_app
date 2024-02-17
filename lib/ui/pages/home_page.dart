@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/data/models/forecast_list_item_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 import 'package:weather_app/providers/weather_provider.dart';
-import 'package:weather_app/ui/widgets/MainCard.dart';
+import 'package:weather_app/ui/widgets/forecast_card.dart';
+import 'package:weather_app/ui/widgets/main_card.dart';
 import 'package:weather_app/utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late BuildContext _scaffoldContext;
   final TextEditingController cityController = TextEditingController();
 
   @override
@@ -67,7 +66,9 @@ class _HomePageState extends State<HomePage> {
                           ElevatedButton(
                             onPressed: () {
                               weatherInfo.fetchWeather(
-                                selectedCity: cityController.text,
+                                selectedCity: cityController.text != ""
+                                    ? cityController.text
+                                    : null,
                               );
                             },
                             child: Text('Ara'),
@@ -106,40 +107,6 @@ class _HomePageState extends State<HomePage> {
               );
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class ForecastCard extends StatelessWidget {
-  final ListItemModel forecast;
-
-  ForecastCard({required this.forecast});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 5),
-        child: Column(
-          children: [
-            Container(
-              child: Center(
-                  child: Text(
-                      '${DateTime.parse(forecast.dateTime).hour.toString().padLeft(2, '0')}')),
-            ),
-            Container(
-              child: Center(
-                  child: Image.network(
-                'http://openweathermap.org/img/w/${forecast.weather[0].icon}.png',
-              )),
-            ),
-            Container(
-              child: Center(
-                  child: Text('${forecast.main.temperature!.round()}°C')),
-            ),
-          ],
         ),
       ),
     );
