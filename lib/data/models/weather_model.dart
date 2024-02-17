@@ -1,5 +1,4 @@
 import 'package:weather_app/data/models/current_model.dart';
-import 'package:weather_app/data/models/weather_desc_model.dart';
 
 class WeatherModel {
   final double latitude;

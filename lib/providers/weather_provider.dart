@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/models/current_weather_model.dart';
-import 'package:weather_app/data/models/weather_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 import 'package:weather_app/data/services/weather_service.dart';
-import 'package:weather_app/ui/widgets/CustomExceptions.dart';
 
 class WeatherProvider extends ChangeNotifier {
   String _errorMessage = '';
@@ -11,11 +9,13 @@ class WeatherProvider extends ChangeNotifier {
 
   CurrentWeatherModel? _weather;
   ForecastModel? _forecastData;
+  String? _timeZone;
 
   CurrentWeatherModel? get weather => _weather;
   ForecastModel? get forecastData => _forecastData;
+  String? get timeZone => _timeZone;
 
-  Future<void> fetchWeather({selectedCity}) async {
+  Future<void> fetchWeather({String? selectedCity}) async {
     String? cityName = await WeatherService().getCurrentCity();
     try {
       final weatherData =
@@ -35,9 +35,6 @@ class WeatherProvider extends ChangeNotifier {
   }
 
   void setSelectedCity(String newCity) {
-    // Seçilen şehir bilgisini güncelle
-    var _selectedCity = newCity;
-
     // WeatherService sınıfını kullanarak hava durumu ve tahmin verilerini güncelle
     fetchWeather(selectedCity: newCity);
   }
@@ -46,4 +43,10 @@ class WeatherProvider extends ChangeNotifier {
     _errorMessage = message;
     notifyListeners();
   }
+
+  // void _getTimeZone(String countryCode) async {
+  //   _timeZone = await WeatherService().getTimeZone(countryCode);
+  //   print(_timeZone);
+  //   notifyListeners();
+  // }
 }

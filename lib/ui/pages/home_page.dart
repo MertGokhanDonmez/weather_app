@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:icons_flutter/icons_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
 import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/ui/widgets/forecast_card.dart';
 import 'package:weather_app/ui/widgets/main_card.dart';
+import 'package:weather_app/ui/widgets/mini_card.dart';
 import 'package:weather_app/utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,11 +53,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: SafeArea(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // input area
                       Row(
                         children: [
-                          SizedBox(width: 8),
                           Expanded(
                             child: TextField(
                               controller: cityController,
@@ -75,27 +77,94 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
+                      // main area
                       Expanded(
-                        child: Center(
-                          child: MainCard(
-                            weather: weather,
-                            isFiltered: cityController.text != '',
+                        flex: 3,
+                        child: MainCard(
+                          isFiltered: cityController.text != '',
+                        ),
+                      ),
+                      // mini cards area
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              // top
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: MiniCard(
+                                        FlutterIcons.human_greeting_mco,
+                                        'Hissedilen',
+                                        '${weather.main.feelsLike!.round().toString()}°C',
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: MiniCard(
+                                        FlutterIcons.wi_thermometer_wea,
+                                        'En Yüksek',
+                                        '${weather.main.maxTemp!.round().toString()}°C',
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: MiniCard(
+                                        FlutterIcons
+                                            .wi_thermometer_exterior_wea,
+                                        'En Düşük',
+                                        '${weather.main.minTemp!.round().toString()}°C',
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              // bottom
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: MiniCard(
+                                          FlutterIcons.wi_humidity_wea,
+                                          'Nem',
+                                          '${weather.main.humidity.toString()} %'),
+                                    ),
+                                    Expanded(
+                                      child: MiniCard(
+                                          FlutterIcons.wi_strong_wind_wea,
+                                          'Rüzgar',
+                                          '${weather.wind.speed.toString()} km/s'),
+                                    ),
+                                    Expanded(
+                                      child: MiniCard(
+                                          FlutterIcons.wi_barometer_wea,
+                                          'Basınç',
+                                          '${weather.main.pressure.toString()} MB'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 110, 110, 110),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                      // forecast area
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            color: Color.fromARGB(149, 0, 0, 0),
                             child: Row(
                               children:
                                   forecastWeather.list.take(6).map((forecast) {
-                                return ForecastCard(forecast: forecast);
+                                return Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ForecastCard(forecast: forecast),
+                                  ),
+                                );
                               }).toList(),
                             ),
                           ),

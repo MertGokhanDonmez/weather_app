@@ -1,8 +1,5 @@
 import 'package:weather_app/data/models/city_model.dart';
-import 'package:weather_app/data/models/clouds_model.dart';
 import 'package:weather_app/data/models/forecast_list_item_model.dart';
-import 'package:weather_app/data/models/main_model.dart';
-import 'package:weather_app/data/models/weather_desc_model.dart';
 
 class ForecastModel {
   final List<ListItemModel> list;

@@ -1,7 +1,5 @@
 import 'package:weather_app/data/models/clouds_model.dart';
-import 'package:weather_app/data/models/coordinate_model.dart';
 import 'package:weather_app/data/models/main_model.dart';
-import 'package:weather_app/data/models/sys_model.dart';
 import 'package:weather_app/data/models/weather_desc_model.dart';
 import 'package:weather_app/data/models/wind_model.dart';
 

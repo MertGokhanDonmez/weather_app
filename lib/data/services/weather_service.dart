@@ -5,10 +5,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
-import 'package:weather_app/ui/widgets/CustomExceptions.dart';
+import 'package:weather_app/ui/widgets/custom_exception.dart';
 
 import '../../configs/config.dart';
-import '../models/weather_model.dart';
 
 class WeatherService {
   static final WeatherService _instance = WeatherService._privateConstructor();
@@ -80,4 +79,26 @@ class WeatherService {
 
     return city ?? "";
   }
+
+  // Future<String?> getTimeZone(String countryCode) async {
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse('https://restcountries.com/v3.1/alpha/$countryCode'),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> countryData = json.decode(response.body);
+
+  //       if (countryData.containsKey('timezones') &&
+  //           (countryData['timezones'] as List).isNotEmpty) {
+  //         return countryData['timezones'][0];
+  //       }
+  //     }
+
+  //     return null;
+  //   } catch (e) {
+  //     print('Error fetching time zone: $e');
+  //     return null;
+  //   }
+  // }
 }
