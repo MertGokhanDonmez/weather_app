@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/data/models/current_weather_model.dart';
-import 'package:weather_app/providers/weather_provider.dart';
-import 'package:icons_flutter/icons_flutter.dart';
 
 class MiniCard extends StatelessWidget {
   final IconData cardIcon;
@@ -14,7 +10,6 @@ class MiniCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weatherInfo = context.read<WeatherProvider>();
     return Card(
       color: Color.fromARGB(149, 0, 0, 0),
       child: Column(
@@ -31,7 +26,7 @@ class MiniCard extends StatelessWidget {
             flex: 1,
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
                   color: Colors.white),
@@ -41,7 +36,7 @@ class MiniCard extends StatelessWidget {
             flex: 1,
             child: Text(
               data,
-              style: TextStyle(fontSize: 15, color: Colors.white),
+              style: const TextStyle(fontSize: 15, color: Colors.white),
             ),
           )
         ],

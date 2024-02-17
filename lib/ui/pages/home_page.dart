@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:icons_flutter/icons_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_app/data/models/current_weather_model.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/models/weather_forcast_model.dart';
