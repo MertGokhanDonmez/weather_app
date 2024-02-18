@@ -28,8 +28,7 @@ class WeatherProvider extends ChangeNotifier {
 
       notifyListeners(); // degiskenleri dinleyen herkese degisiklikleri haber veriyor
     } catch (error) {
-      _setErrorMessage('${error}');
-      _weather = null; // Hata durumunda _weather'ı null olarak ayarla
+      setErrorMessage('${error}');
       notifyListeners();
     }
   }
@@ -39,7 +38,7 @@ class WeatherProvider extends ChangeNotifier {
     fetchWeather(selectedCity: newCity);
   }
 
-  void _setErrorMessage(String message) {
+  void setErrorMessage(String message) {
     _errorMessage = message;
     notifyListeners();
   }

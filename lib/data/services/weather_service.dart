@@ -21,7 +21,7 @@ class WeatherService {
   Future<dynamic> getWeather(String city, String unit, {int? dtime}) async {
     try {
       var response = await http.get(Uri.parse(
-          '$API_ENDPOINT/weather?q=$city&dt=${dtime ?? ''}&units=$unit&appid=$OPENAPIWEATHER_API_KEY'));
+          '$API_ENDPOINT/weather?lang=tr&q=$city&dt=${dtime ?? ''}&units=$unit&appid=$OPENAPIWEATHER_API_KEY'));
       if (response.statusCode == 200) {
         final weatherData = json.decode(response.body);
         final weatherModel = CurrentWeatherModel.fromJson(weatherData);

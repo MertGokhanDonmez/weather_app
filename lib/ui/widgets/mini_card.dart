@@ -19,7 +19,7 @@ class MiniCard extends StatelessWidget {
             child: Icon(
               cardIcon,
               size: 30,
-              color: Color.fromARGB(255, 237, 178, 0),
+              color: Color.fromARGB(255, 255, 195, 14),
             ),
           ),
           Expanded(

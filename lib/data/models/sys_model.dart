@@ -1,9 +1,9 @@
 class SysModel {
-  final int type;
-  final int id;
-  final String country;
-  final int sunrise;
-  final int sunset;
+  final int? type;
+  final int? id;
+  final String? country;
+  final int? sunrise;
+  final int? sunset;
   SysModel({
     required this.type,
     required this.id,

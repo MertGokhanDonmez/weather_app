@@ -8,6 +8,7 @@ class CoordinateModel {
   });
 
   factory CoordinateModel.fromJson(Map<String, dynamic> json) {
-    return CoordinateModel(longitude: json['lon'], latitude: json['lat']);
+    return CoordinateModel(
+        longitude: json['lon'].toDouble(), latitude: json['lat'].toDouble());
   }
 }

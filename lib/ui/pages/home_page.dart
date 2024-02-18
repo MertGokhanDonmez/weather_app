@@ -30,12 +30,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, value, child) {
             if (value.weather == null || value.forecastData == null) {
               // Veri bekleniyor ise gösterilecek widget
-              if (value.errorMessage.isNotEmpty) {
-                // Hata durumunda uyarı göster
-                return Text(value.errorMessage);
-              } else {
-                return CircularProgressIndicator();
-              }
+              return CircularProgressIndicator();
             } else {
               // Veriler varsa normal görüntüleme
               CurrentWeatherModel weather = value.weather!;
@@ -54,27 +49,100 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       // input area
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: cityController,
-                              decoration: const InputDecoration(
-                                  hintText: 'Şehir Adı',
-                                  icon: Icon(Icons.search)),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(149, 0, 0, 0),
+                              border: Border.all(color: Colors.amber, width: 1),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(10),
+                              )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                flex: 3,
+                                child: TextField(
+                                  style: const TextStyle(color: Colors.white),
+                                  controller: cityController,
+                                  decoration: const InputDecoration(
+                                    hintStyle: TextStyle(color: Colors.white),
+                                    fillColor: Colors.white,
+                                    hintText: 'ülke veya şehir',
+                                    icon: Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors
+                                              .transparent), // Altındaki çizgiyi kaldırır
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors
+                                              .transparent), // Altındaki çizgiyi kaldırır
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Flexible(
+                                flex: 1,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(),
+                                  onPressed: () {
+                                    weatherInfo
+                                        .fetchWeather(
+                                      selectedCity: cityController.text != ""
+                                          ? cityController.text
+                                          : null,
+                                    )
+                                        .then((val) {
+                                      if (value.errorMessage.isNotEmpty) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) {
+                                            return AlertDialog(
+                                              title: Text('Hata'),
+                                              content: Text(value.errorMessage),
+                                              actions: [
+                                                ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          backgroundColor:
+                                                              Colors.red),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                    weatherInfo
+                                                        .setErrorMessage('');
+                                                  },
+                                                  child: const Text(
+                                                    'Geri Dön',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        cityController.text = '';
+                                      }
+                                    });
+                                  },
+                                  child: const Text(
+                                    'Ara',
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              weatherInfo.fetchWeather(
-                                selectedCity: cityController.text != ""
-                                    ? cityController.text
-                                    : null,
-                              );
-                            },
-                            child: Text('Ara'),
-                          ),
-                        ],
+                        ),
                       ),
                       // main area
                       Expanded(
@@ -98,14 +166,14 @@ class _HomePageState extends State<HomePage> {
                                       child: MiniCard(
                                         FlutterIcons.human_greeting_mco,
                                         'Hissedilen',
-                                        '${weather.main.feelsLike!.round().toString()}°C',
+                                        '${weather.main!.feelsLike!.round().toString()}°C',
                                       ),
                                     ),
                                     Expanded(
                                       child: MiniCard(
                                         FlutterIcons.wi_thermometer_wea,
                                         'En Yüksek',
-                                        '${weather.main.maxTemp!.round().toString()}°C',
+                                        '${weather.main!.maxTemp!.round().toString()}°C',
                                       ),
                                     ),
                                     Expanded(
@@ -113,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                         FlutterIcons
                                             .wi_thermometer_exterior_wea,
                                         'En Düşük',
-                                        '${weather.main.minTemp!.round().toString()}°C',
+                                        '${weather.main!.minTemp!.round().toString()}°C',
                                       ),
                                     )
                                   ],

@@ -8,7 +8,7 @@ import 'package:weather_app/data/models/wind_model.dart';
 class CurrentWeatherModel {
   final CoordinateModel coordinate;
   final List<WeatherDesc> weather;
-  final String base;
+  final String? base;
   final MainModel main;
   final int visibility;
   final WindModel wind;
@@ -20,7 +20,7 @@ class CurrentWeatherModel {
   CurrentWeatherModel({
     required this.coordinate,
     required this.weather,
-    required this.base,
+    this.base,
     required this.main,
     required this.visibility,
     required this.wind,
