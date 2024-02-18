@@ -1,16 +1,15 @@
-# weather_app
+This is the weather information app.
 
-A new Flutter project.
+Service used: https://openweathermap.org/
+Technology: Flutter
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Features:
+1- Location based wheather information
+2- Filter based city or country
+3- Responsive ui
+4- Error handling
+5- State management using provider
+6- Basic theme data
+7- Future weather forecast
+8- Animated wheather
+9- Background image that changes depending on the weather
