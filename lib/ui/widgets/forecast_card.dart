@@ -24,8 +24,8 @@ class _ForecastCardState extends State<ForecastCard> {
         Expanded(
           flex: 1,
           child: Text(
-            '${hour}',
-            style: TextStyle(
+            hour,
+            style: const TextStyle(
                 fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
@@ -33,7 +33,7 @@ class _ForecastCardState extends State<ForecastCard> {
           flex: 1,
           child: Icon(
             getIcon(weatherState),
-            color: Color.fromARGB(255, 255, 195, 14),
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         Expanded(

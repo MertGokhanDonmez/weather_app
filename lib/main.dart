@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/themes/main_theme.dart';
 import 'package:weather_app/ui/pages/home_page.dart';
 import 'package:weather_app/providers/weather_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-          // Tema özelleştirmeleri buraya eklenir
-          ),
+      theme: mainTheme,
       home: HomePage(),
     );
   }

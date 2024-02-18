@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(149, 0, 0, 0),
+                              color: Theme.of(context).colorScheme.primary,
                               border: Border.all(color: Colors.amber, width: 1),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(10),
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Flexible(
                                 flex: 1,
                                 child: ElevatedButton(
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                                           context: context,
                                           builder: (_) {
                                             return AlertDialog(
-                                              title: Text('Hata'),
+                                              title: const Text('Hata'),
                                               content: Text(value.errorMessage),
                                               actions: [
                                                 ElevatedButton(
@@ -169,14 +169,14 @@ class _HomePageState extends State<HomePage> {
                                       child: MiniCard(
                                         FlutterIcons.human_greeting_mco,
                                         'Hissedilen',
-                                        '${weather.main!.feelsLike!.round().toString()}°C',
+                                        '${weather.main.feelsLike!.round().toString()}°C',
                                       ),
                                     ),
                                     Expanded(
                                       child: MiniCard(
                                         FlutterIcons.wi_thermometer_wea,
                                         'En Yüksek',
-                                        '${weather.main!.maxTemp!.round().toString()}°C',
+                                        '${weather.main.maxTemp!.round().toString()}°C',
                                       ),
                                     ),
                                     Expanded(
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                                         FlutterIcons
                                             .wi_thermometer_exterior_wea,
                                         'En Düşük',
-                                        '${weather.main!.minTemp!.round().toString()}°C',
+                                        '${weather.main.minTemp!.round().toString()}°C',
                                       ),
                                     )
                                   ],
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
-                            color: Color.fromARGB(149, 0, 0, 0),
+                            color: Theme.of(context).colorScheme.primary,
                             child: Row(
                               children:
                                   forecastWeather.list.take(6).map((forecast) {

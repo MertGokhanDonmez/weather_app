@@ -11,7 +11,7 @@ class MiniCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(149, 0, 0, 0),
+      color: Theme.of(context).colorScheme.primary,
       child: Column(
         children: [
           Expanded(
@@ -19,7 +19,7 @@ class MiniCard extends StatelessWidget {
             child: Icon(
               cardIcon,
               size: 30,
-              color: Color.fromARGB(255, 255, 195, 14),
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           Expanded(
