@@ -6,9 +6,7 @@ import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/utils.dart';
 
 class MainCard extends StatefulWidget {
-  final bool isFiltered;
-
-  MainCard({required this.isFiltered});
+  MainCard({Key? key}) : super(key: key);
 
   @override
   State<MainCard> createState() => _MainCardState();
@@ -22,11 +20,10 @@ class _MainCardState extends State<MainCard> {
         CurrentWeatherModel weather = value.weather!;
         final weatherAssets =
             WeatherUtils.getWeatherAssets(weather.weather[0].main);
-        final _isFiltered = widget.isFiltered;
         return Column(
           children: [
             // location
-            if (!_isFiltered)
+            if (!value.isFiltered)
               const Expanded(
                 flex: 2,
                 child: Align(

@@ -11,6 +11,9 @@ class WeatherProvider extends ChangeNotifier {
   ForecastModel? _forecastData;
   String? _timeZone;
 
+  bool _isFiltered = false;
+  bool get isFiltered => _isFiltered;
+
   CurrentWeatherModel? get weather => _weather;
   ForecastModel? get forecastData => _forecastData;
   String? get timeZone => _timeZone;
@@ -40,6 +43,11 @@ class WeatherProvider extends ChangeNotifier {
 
   void setErrorMessage(String message) {
     _errorMessage = message;
+    notifyListeners();
+  }
+
+  void setFilterStatus(bool status) {
+    _isFiltered = status;
     notifyListeners();
   }
 

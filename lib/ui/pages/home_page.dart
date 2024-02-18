@@ -130,6 +130,11 @@ class _HomePageState extends State<HomePage> {
                                         );
                                         cityController.text = '';
                                       }
+                                      if (cityController.text != "") {
+                                        weatherInfo.setFilterStatus(true);
+                                      } else if (value.errorMessage.isEmpty) {
+                                        weatherInfo.setFilterStatus(false);
+                                      }
                                     });
                                   },
                                   child: const Text(
@@ -147,9 +152,7 @@ class _HomePageState extends State<HomePage> {
                       // main area
                       Expanded(
                         flex: 3,
-                        child: MainCard(
-                          isFiltered: cityController.text != '',
-                        ),
+                        child: MainCard(),
                       ),
                       // mini cards area
                       Expanded(
