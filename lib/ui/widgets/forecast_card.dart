@@ -25,14 +25,17 @@ class _ForecastCardState extends State<ForecastCard> {
           flex: 1,
           child: Text(
             hour,
-            style: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.035,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
         ),
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Icon(
             getIcon(weatherState),
+            size: MediaQuery.of(context).size.width * 0.05,
             color: Theme.of(context).colorScheme.secondary,
           ),
         ),
@@ -40,7 +43,10 @@ class _ForecastCardState extends State<ForecastCard> {
           flex: 1,
           child: Text(
             '${widget.forecast.main.temperature!.round()}°C',
-            style: TextStyle(fontSize: 15, color: Colors.white),
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.03,
+              color: Colors.white,
+            ),
           ),
         ),
       ],

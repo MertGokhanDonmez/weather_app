@@ -18,7 +18,7 @@ class MiniCard extends StatelessWidget {
             flex: 2,
             child: Icon(
               cardIcon,
-              size: 30,
+              size: MediaQuery.of(context).size.width * 0.055,
               color: Theme.of(context).colorScheme.secondary,
             ),
           ),
@@ -26,9 +26,9 @@ class MiniCard extends StatelessWidget {
             flex: 1,
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 17,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
                   color: Colors.white),
             ),
           ),
@@ -36,7 +36,10 @@ class MiniCard extends StatelessWidget {
             flex: 1,
             child: Text(
               data,
-              style: const TextStyle(fontSize: 15, color: Colors.white),
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.035,
+                color: Colors.white,
+              ),
             ),
           )
         ],

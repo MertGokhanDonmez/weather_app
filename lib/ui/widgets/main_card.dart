@@ -15,6 +15,8 @@ class MainCard extends StatefulWidget {
 class _MainCardState extends State<MainCard> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final aspectRatio = screenSize.width / screenSize.height;
     return Consumer<WeatherProvider>(
       builder: (context, value, child) {
         CurrentWeatherModel weather = value.weather!;
@@ -24,7 +26,7 @@ class _MainCardState extends State<MainCard> {
           children: [
             // location
             if (!value.isFiltered)
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -33,8 +35,10 @@ class _MainCardState extends State<MainCard> {
                     style: TextStyle(
                       color: Colors.amber,
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      shadows: [
+                      fontSize: aspectRatio <= 0.55
+                          ? MediaQuery.of(context).size.width * 0.08
+                          : MediaQuery.of(context).size.width * 0.07,
+                      shadows: const [
                         Shadow(
                           color: Colors.black,
                           blurRadius: 2.0,
@@ -50,11 +54,13 @@ class _MainCardState extends State<MainCard> {
               flex: 2,
               child: Text(
                 weather.cityName,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 50,
+                  fontSize: aspectRatio <= 0.55
+                      ? MediaQuery.of(context).size.width * 0.1
+                      : MediaQuery.of(context).size.width * 0.085,
                   color: Color.fromARGB(255, 240, 240, 240),
-                  shadows: [
+                  shadows: const [
                     Shadow(
                       color: Colors.black,
                       blurRadius: 2.0,
@@ -66,7 +72,7 @@ class _MainCardState extends State<MainCard> {
             ),
             // weather animation
             Expanded(
-              flex: 7,
+              flex: 6,
               child: Lottie.asset(weatherAssets[0]),
             ),
             // temperature
@@ -74,11 +80,13 @@ class _MainCardState extends State<MainCard> {
               flex: 2,
               child: Text(
                 '${weather.main.temperature!.round()}°C',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 50,
+                  fontSize: aspectRatio <= 0.55
+                      ? MediaQuery.of(context).size.width * 0.12
+                      : MediaQuery.of(context).size.width * 0.082,
                   color: Color.fromARGB(255, 240, 240, 240),
-                  shadows: [
+                  shadows: const [
                     Shadow(
                       color: Colors.black, // Choose the color of the shadow
                       blurRadius:
